@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu d'additions et de soustractions</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-image: url('fond.jpg');
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-family: 'Comic Sans MS', cursive;
+            color: #007bff;
+        }
+        #question-container {
+            border: 2px solid #fff; /* Ajout de la bordure blanche */
+            border-radius: 10px; /* Coins arrondis */
+            padding: 20px; /* Espacement intérieur */
+            background-color: rgba(255, 255, 255, 0.7); /* Fond blanc semi-transparent */
+            margin-bottom: 20px; /* Marge inférieure */
+            max-width: 400px; /* Largeur maximale pour l'affichage des questions */
+            margin: auto; /* Centrer horizontalement */
+        }
+        #question {
+            font-size: 24px;
+            margin-bottom: 10px; /* Réduire la marge pour mieux s'intégrer dans le conteneur */
+        }
+        #feedback {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #lives {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .heart {
+            color: red;
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu d'additions et de soustractions</h1>
+    <div id="question-container"> <!-- Conteneur pour les questions -->
+        <div id="lives">
+            Vies: 
+            <span class="heart">&hearts;</span>
+            <span class="heart">&hearts;</span>
+            <span class="heart">&hearts;</span>
+        </div>
+        <div id="question"></div> <!-- Div pour les questions -->
+        <input type="text" id="answer" placeholder="Entrez votre réponse">
+        <button onclick="checkAnswer()">Vérifier</button>
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        // Variables
+        var lives = 3;
+        var questions = 10;
+        var currentQuestion = 0;
+
+        // Function to generate random addition or subtraction question
+        function generateQuestion() {
+            var num1 = Math.floor(Math.random() * 15) + 1;
+            var num2 = Math.floor(Math.random() * num1) + 1; // Ensure num2 is less than or equal to num1
+            var operator = Math.random() < 0.5 ? '+' : '-';
+            var question = num1 + ' ' + operator + ' ' + num2;
+            document.getElementById('question').textContent = question;
+            return eval(question); // Evaluate the expression to get the answer
+        }
+
+        // Function to check the answer
+        function checkAnswer() {
+            var userAnswer = parseInt(document.getElementById('answer').value);
+            var result = eval(document.getElementById('question').textContent);
+            var feedback = document.getElementById('feedback');
+
+            if (userAnswer === result) {
+                feedback.textContent = 'Bonne réponse !';
+            } else {
+                feedback.textContent = 'Mauvaise réponse !';
+                lives--;
+                updateLives();
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < questions && lives > 0) {
+                document.getElementById('answer').value = ''; // Clear the input field
+                generateQuestion();
+            } else {
+                endGame();
+            }
+        }
+
+        // Function to end the game
+        function endGame() {
+            var feedback = document.getElementById('feedback');
+            if (lives > 0) {
+                feedback.textContent = 'Félicitations ! Vous avez gagné !';
+                // Rediriger vers la page de victoire
+                window.location.href = 'gagner.html';
+            } else {
+                feedback.textContent = 'Dommage ! Vous avez perdu toutes vos vies.';
+                // Rediriger vers la page de défaite
+                window.location.href = 'perdu.html';
+            }
+            document.querySelector('button').disabled = true;
+        }
+
+        // Function to update lives display
+        function updateLives() {
+            var hearts = document.getElementsByClassName('heart');
+            for (var i = 0; i < hearts.length; i++) {
+                if (i < lives) {
+                    hearts[i].style.color = 'red';
+                } else {
+                    hearts[i].style.color = 'lightgray';
+                }
+            }
+        }
+
+        // Initialize the game
+        generateQuestion();
+        updateLives();
+    </script>
+</body>
+</html>
