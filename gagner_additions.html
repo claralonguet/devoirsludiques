@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Victoire</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('fond.jpg');
+            background-image: url('fondv.jpg');
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,12 +17,23 @@
         }
         .container {
             text-align: center;
+            background-color: #fff; /* Couleur de fond du conteneur */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #007bff;
+            color: #4CAF50; /* Couleur du titre */
+        }
+        #victory-image {
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        #buttons {
+            margin-top: 20px;
         }
         .button {
-            background-color: #007bff;
+            background-color: #4CAF50;
             border: none;
             color: white;
             padding: 10px 20px;
@@ -36,17 +47,15 @@
             margin-right: 10px;
         }
         .button:hover {
-            background-color: #0056b3;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Bienvenue sur le jeu d'additions et de soustractions !</h1>
         <div id="buttons">
-            <a href="jeu.html" class="button">JOUER</a>
-            <a href="victoire.html" class="button">VICTOIRE</a>
-            <a href="defaite.html" class="button">DÉFAITE</a>
+                        <a href="javascript:void(0);" onclick="window.open('https://www.youtube.com/watch?v=eoWM_IJsHV8', '_blank');" class="button">SURPRISE</a>
+            <a href="maths.html" class="button">RETOUR AU MENU</a>
         </div>
     </div>
 </body>

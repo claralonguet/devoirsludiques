@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Maths</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('fondac.jpg');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .link {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            text-decoration: none; /* Remove default underline */
+        }
+
+        .link:hover {
+            background-color: #2980b9;
+        }
+
+        /* Style du bouton de retour */
+        #return-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ccc;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #return-button:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Page Maths</h1>
+        <a href="soustractions.html" class="link">Soustractions</a>
+        <a href="additions.html" class="link">Additions</a>
+        <a href="mixes.html" class="link">Mixes</a>
+    </div>
+    <!-- Bouton de retour -->
+    <a href="Index.html" id="return-button">Retour</a>
+</body>
+</html>

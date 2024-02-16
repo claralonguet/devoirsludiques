@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu d'additions</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-image: url('fond.jpg');
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-family: 'Comic Sans MS', cursive;
+            color: #007bff;
+        }
+        #question-container {
+            border: 2px solid #fff;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            max-width: 400px;
+            margin: auto;
+        }
+        #question {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        #feedback {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #lives {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .heart {
+            color: red;
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu d'additions</h1>
+    <div id="question-container">
+        <div id="lives">
+            Vies: 
+            <span class="heart">&hearts;</span>
+            <span class="heart">&hearts;</span>
+            <span class="heart">&hearts;</span>
+        </div>
+        <div id="question"></div>
+        <input type="text" id="answer" placeholder="Entrez votre réponse">
+        <button onclick="checkAnswer()">Vérifier</button>
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        var lives = 3;
+        var questions = 10;
+        var currentQuestion = 0;
+
+        function generateQuestion() {
+            var num1 = Math.floor(Math.random() * 15) + 1;
+            var num2 = Math.floor(Math.random() * 15) + 1;
+            var question = num1 + ' + ' + num2;
+            document.getElementById('question').textContent = question;
+            return eval(question);
+        }
+
+        function checkAnswer() {
+            var userAnswer = parseInt(document.getElementById('answer').value);
+            var result = eval(document.getElementById('question').textContent);
+            var feedback = document.getElementById('feedback');
+
+            if (userAnswer === result) {
+                feedback.textContent = 'Bonne réponse !';
+            } else {
+                feedback.textContent = 'Mauvaise réponse !';
+                lives--;
+                updateLives();
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < questions && lives > 0) {
+                document.getElementById('answer').value = '';
+                generateQuestion();
+            } else {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            var feedback = document.getElementById('feedback');
+            if (lives > 0) {
+                feedback.textContent = 'Félicitations ! Vous avez gagné !';
+                window.location.href = 'gagner_additions.html';
+            } else {
+                feedback.textContent = 'Dommage ! Vous avez perdu toutes vos vies.';
+                window.location.href = 'perdu_additions.html';
+            }
+            document.querySelector('button').disabled = true;
+        }
+
+        function updateLives() {
+            var hearts = document.getElementsByClassName('heart');
+            for (var i = 0; i < hearts.length; i++) {
+                if (i < lives) {
+                    hearts[i].style.color = 'red';
+                } else {
+                    hearts[i].style.color = 'lightgray';
+                }
+            }
+        }
+
+        generateQuestion();
+        updateLives();
+    </script>
+</body>
+</html>
