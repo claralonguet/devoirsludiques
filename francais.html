@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec contenu Genially et EducaPlay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('fondac.jpg');
+        }
+        .main-title-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .main-title {
+            text-align: center;
+            font-size: 24px;
+            margin: 0;
+        }
+        .container-wrapper-genially {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+        .genially-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .loader-genially {
+            position: relative;
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .genially-embed {
+            margin: 0 auto;
+            position: relative;
+            height: auto;
+            width: 100%;
+        }
+        .dictation-button-container {
+            text-align: center;
+        }
+        .dictation-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 10px auto;
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            text-decoration: none; /* Remove default underline */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bouton pour la dictée -->
+    <div class="dictation-button-container">
+        <a href="https://fr.educaplay.com/ressources-pedagogiques/17845140-la_dictee_de_mot.html" class="dictation-button">Dictée</a>
+    </div>
+
+    <!-- Script pour intégrer Genially -->
+<div class="container-wrapper-genially"><video class="loader-genially" autoplay="autoplay" loop="loop" playsinline="playsInline" muted="muted"><source src="https://static.genial.ly/resources/loader-default.mp4" type="video/mp4" />Your browser does not support the video tag.</video><div id="65b970a2ec011b0013ad64c8" class="genially-embed"></div></div>
+    <script>
+        (function (d) {
+            var js, id = "genially-embed-js", ref = d.getElementsByTagName("script")[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement("script"); js.id = id; js.async = true;
+            js.src = "https://view.genial.ly/static/embed/embed.js";
+            ref.parentNode.insertBefore(js, ref);
+        }(document));
+    </script>
+</body>
+</html>
