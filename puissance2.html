@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puissance 4</title>
+    <style>
+        /* Styles pour centrer la grille */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('fondac.jpg');
+        }
+
+        #game-container {
+            text-align: center;
+        }
+        /* Style de base pour la grille */
+        #board {
+            display: grid;
+            grid-template-columns: repeat(7, 50px);
+            grid-template-rows: repeat(6, 50px);
+            gap: 2px;
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .cell:hover {
+            background-color: #eee;
+        }
+        .player1 {
+            background-color: red;
+        }
+        .player2 {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Puissance 4</h1>
+        <div id="board">
+            <!-- La grille de jeu sera générée ici -->
+        </div>
+        <button onclick="resetGame()">Réinitialiser</button>
+    </div>
+    <script>
+        const ROWS = 6;
+        const COLS = 7;
+        let currentPlayer = 1;
+        let board = [];
+
+        // Création de la grille de jeu
+        const boardElement = document.getElementById('board');
+        for (let row = 0; row < ROWS; row++) {
+            board[row] = [];
+            for (let col = 0; col < COLS; col++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.column = col;
+                cell.addEventListener('click', () => dropPiece(col));
+                boardElement.appendChild(cell);
+                board[row][col] = cell;
+            }
+        }
+
+        // Fonction pour déposer une pièce dans la colonne
+        function dropPiece(column) {
+            for (let row = ROWS - 1; row >= 0; row--) {
+                if (!board[row][column].classList.contains('player1') && !board[row][column].classList.contains('player2')) {
+                    board[row][column].classList.add('player' + currentPlayer);
+                    if (checkWin(row, column)) {
+                        alert('Joueur ' + currentPlayer + ' a gagné !');
+                        resetGame();
+                    } else {
+                        currentPlayer = currentPlayer === 1 ? 2 : 1;
+                    }
+                    return;
+                }
+            }
+        }
+
+        // Vérifie si quelqu'un a gagné
+        function checkWin(row, col) {
+            const directions = [[0, 1], [1, 0], [1, 1], [1, -1]];
+
+            for (let [dx, dy] of directions) {
+                let count = 1;
+                for (let i = 1; i < 4; i++) {
+                    const newRow = row + i * dx;
+                    const newCol = col + i * dy;
+                    if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS && board[newRow][newCol].classList.contains('player' + currentPlayer)) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+                for (let i = 1; i < 4; i++) {
+                    const newRow = row - i * dx;
+                    const newCol = col - i * dy;
+                    if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS && board[newRow][newCol].classList.contains('player' + currentPlayer)) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+                if (count >= 4) return true;
+            }
+            return false;
+        }
+
+        // Fonction pour réinitialiser le jeu
+        function resetGame() {
+            for (let row = 0; row < ROWS; row++) {
+                for (let col = 0; col < COLS; col++) {
+                    board[row][col].classList.remove('player1', 'player2');
+                }
+            }
+            currentPlayer = 1;
+        }
+    </script>
+</body>
+</html>

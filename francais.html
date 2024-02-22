@@ -66,9 +66,27 @@
             display: inline-block;
             text-decoration: none; /* Remove default underline */
         }
+        .back-to-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            z-index: 9999; /* assure que le bouton est au-dessus de tout le reste */
+            transition: background-color 0.3s ease;
+        }
+        .back-to-home:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
+
+    <a href="index.html" class="back-to-home">Retour</a>
 
     <!-- Bouton pour la dictée -->
     <div class="dictation-button-container">
@@ -76,7 +94,7 @@
     </div>
 
     <!-- Script pour intégrer Genially -->
-<div class="container-wrapper-genially"><video class="loader-genially" autoplay="autoplay" loop="loop" playsinline="playsInline" muted="muted"><source src="https://static.genial.ly/resources/loader-default.mp4" type="video/mp4" />Your browser does not support the video tag.</video><div id="65b970a2ec011b0013ad64c8" class="genially-embed"></div></div>
+    <div class="container-wrapper-genially"><video class="loader-genially" autoplay="autoplay" loop="loop" playsinline="playsInline" muted="muted"><source src="https://static.genial.ly/resources/loader-default.mp4" type="video/mp4" />Your browser does not support the video tag.</video><div id="65b970a2ec011b0013ad64c8" class="genially-embed"></div></div>
     <script>
         (function (d) {
             var js, id = "genially-embed-js", ref = d.getElementsByTagName("script")[0];
@@ -86,5 +104,6 @@
             ref.parentNode.insertBefore(js, ref);
         }(document));
     </script>
+
 </body>
 </html>
